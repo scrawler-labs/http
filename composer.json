@@ -1,0 +1,32 @@
+{
+    "name": "scrawler/http",
+    "description": "Http component for scrawler framework",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Pranjal Pandey",
+            "email": "its.pranjalpandey@gmail.com",
+            "homepage": "https://github.com/ipranjal",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "symfony/http-foundation": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Scrawler\\Http\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.25"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
