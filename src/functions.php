@@ -45,3 +45,17 @@ if (!function_exists('session')) {
     }
 
 }
+
+if (! function_exists('redirect')) {
+    function redirect($url, $data=[])
+    {
+        if (!empty($data)) {
+            \Scrawler\App\Scrawler::engine()->session()->start();
+
+            foreach ($data as $key=>$value) {
+                \Scrawler\App\Scrawler::engine()->session()->flash($key, $value);
+            }
+        }
+        return new \Scrawler\App\RedirectResponse($url);
+    }
+}
