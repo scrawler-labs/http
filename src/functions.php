@@ -6,7 +6,7 @@ if (!function_exists('request')) {
         if (class_exists('\Scrawler\App')) {
             if (!\Scrawler\App::engine()->has('request')) {
                 $request = \Scrawler\Http\Request::createFromGlobals();
-                \Scrawler\App::engine()->set('request', $request);
+                \Scrawler\App::engine()->register('request', $request);
             }
             return \Scrawler\App::engine()->request();
         }
@@ -21,7 +21,7 @@ if (!function_exists('response')) {
         if (class_exists('\Scrawler\App')) {
             if (!\Scrawler\App::engine()->has('response')) {
                 $response = new \Scrawler\Http\Response();
-                \Scrawler\App::engine()->set('response', $response);
+                \Scrawler\App::engine()->register('response', $response);
             }
             return \Scrawler\App::engine()->response();
         }
