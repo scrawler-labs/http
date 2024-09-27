@@ -26,7 +26,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
         if (is_null($value) && json_decode($this->getContent())) {
             $value = json_decode($this->getContent())->$key;
         }
-        if($value != ''){
+        if($value == ''){
             return $default;
         }
         return $value;

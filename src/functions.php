@@ -56,6 +56,7 @@ if (! function_exists('redirect')) {
                 \Scrawler\App\Scrawler::engine()->session()->flash($key, $value);
             }
         }
-        return new \Scrawler\App\RedirectResponse($url);
+        return new Symfony\Component\HttpFoundation\RedirectResponse($url);
+
     }
 }
