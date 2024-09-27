@@ -36,7 +36,7 @@ if (!function_exists('session')) {
         if (class_exists('\Scrawler\App')) {
             if (!\Scrawler\App::engine()->has('session')) {
                 $response = new \Scrawler\Http\Session($handler);
-                \Scrawler\App::engine()->set('session', $response);
+                \Scrawler\App::engine()->register('session', $response);
             }
             return \Scrawler\App::engine()->session();
         }
