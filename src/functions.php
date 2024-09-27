@@ -50,10 +50,10 @@ if (! function_exists('redirect')) {
     function redirect($url, $data=[])
     {
         if (!empty($data)) {
-            \Scrawler\App\Scrawler::engine()->session()->start();
+            \Scrawler\App::engine()->session()->start();
 
             foreach ($data as $key=>$value) {
-                \Scrawler\App\Scrawler::engine()->session()->flash($key, $value);
+                \Scrawler\App::engine()->session()->flash($key, $value);
             }
         }
         return new Symfony\Component\HttpFoundation\RedirectResponse($url);

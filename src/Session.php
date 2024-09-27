@@ -65,7 +65,7 @@ class Session extends \Symfony\Component\HttpFoundation\Session\Session
     {
         if (!is_null($message)) {
             $this->getFlashBag()->add($type, $message);
-            return;
+            return null;
         } else {
             if (!is_null($type)) {
                 return $this->getFlashBag()->get($type);
