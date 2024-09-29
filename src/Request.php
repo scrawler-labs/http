@@ -17,7 +17,7 @@ class Request extends \Symfony\Component\HttpFoundation\Request
     /**
      * Method to directly get request variable
      */
-    public function get(string $key,mixed $default = null): ?string
+    public function get(string $key,mixed $default = ''): string
     {
         $value = $this->request->get($key);
         if (is_null($value)) {
