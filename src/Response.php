@@ -29,6 +29,9 @@ class Response extends \Symfony\Component\HttpFoundation\Response
      */
     public function json($data,$headers=[]): Response
     {
+        if(is_array($data)){
+            $data = json_encode($data);
+        }
         $this->setContent($data);
         $this->headers->set('Content-Type', 'application/json');
         foreach ($headers as $key => $value) {
