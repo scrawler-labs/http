@@ -1,8 +1,14 @@
 <?php
 
 if (!function_exists('request')) {
+    /**
+     * Get the request object
+     *
+     * @return \Scrawler\Http\Request
+     */
     function request(): \Scrawler\Http\Request
     {
+        // @codeCoverageIgnoreStart
         if (class_exists('\Scrawler\App')) {
             if (!\Scrawler\App::engine()->has('request')) {
                 $request = \Scrawler\Http\Request::createFromGlobals();
@@ -10,14 +16,21 @@ if (!function_exists('request')) {
             }
             return \Scrawler\App::engine()->request();
         }
+        // @codeCoverageIgnoreEnd
 
         return \Scrawler\Http\Request::createFromGlobals();
     }
 }
 
 if (!function_exists('response')) {
+    /**
+     * Get the response object
+     *
+     * @return \Scrawler\Http\Response
+     */
     function response(): \Scrawler\Http\Response
     {
+        // @codeCoverageIgnoreStart
         if (class_exists('\Scrawler\App')) {
             if (!\Scrawler\App::engine()->has('response')) {
                 $response = new \Scrawler\Http\Response();
@@ -25,21 +38,30 @@ if (!function_exists('response')) {
             }
             return \Scrawler\App::engine()->response();
         }
+        // @codeCoverageIgnoreEnd
 
         return new \Scrawler\Http\Response();
     }
 }
 
 if (!function_exists('session')) {
-    function session($handler = null): \Scrawler\Http\Session
+    /**
+     * Get the session object
+     *
+     * @param Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface|null $storage
+     * @return \Scrawler\Http\Session
+     */
+    function session(Symfony\Component\HttpFoundation\Session\Storage\SessionStorageInterface|null $storage = null): \Scrawler\Http\Session
     {
+        // @codeCoverageIgnoreStart
         if (class_exists('\Scrawler\App')) {
             if (!\Scrawler\App::engine()->has('session')) {
-                $response = new \Scrawler\Http\Session($handler);
+                $response = new \Scrawler\Http\Session($storage);
                 \Scrawler\App::engine()->register('session', $response);
             }
             return \Scrawler\App::engine()->session();
         }
+        // @codeCoverageIgnoreEnd
 
         return new \Scrawler\Http\Session();
     }
@@ -47,16 +69,22 @@ if (!function_exists('session')) {
 }
 
 if (! function_exists('redirect')) {
-    function redirect($url, $data=[])
+    /**
+     * Redirect to a new url
+     * Optionally send data to add to flashbag
+     *
+     * @param string $url
+     * @param array<mixed> $data
+     * @return Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    function redirect(string $url, array $data=[])
     {
         if (!empty($data)) {
-            \Scrawler\App::engine()->session()->start();
-
             foreach ($data as $key=>$value) {
-                \Scrawler\App::engine()->session()->flash($key, $value);
+                session()->flash($key, $value);
             }
         }
-        return new Symfony\Component\HttpFoundation\RedirectResponse($url);
+        return response()->redirect($url);
 
     }
 }

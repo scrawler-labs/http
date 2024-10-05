@@ -11,7 +11,8 @@
         }
     ],
     "require": {
-        "symfony/http-foundation": "^6.3"
+        "symfony/http-foundation": "^6.3",
+        "thecodingmachine/safe": "^2.5"
     },
     "autoload": {
         "psr-4": {
@@ -22,7 +23,12 @@
         ]
     },
     "require-dev": {
-        "pestphp/pest": "^2.25"
+        "pestphp/pest": "^2.25",
+        "phpstan/phpstan": "^1.12",
+        "scrawler/database": "^1.0",
+        "thecodingmachine/phpstan-safe-rule": "^1.2",
+        "rector/rector": "^1.2"
+
     },
     "config": {
         "allow-plugins": {

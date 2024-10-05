@@ -15,7 +15,8 @@ class Session extends \Symfony\Component\HttpFoundation\Session\Session
 {
     /**
      * Magic method to directly set session variable
-     *
+     * @param string $key
+     * @param string $value
      */
     public function __set(string $key,string $value) : void
     {
@@ -24,7 +25,8 @@ class Session extends \Symfony\Component\HttpFoundation\Session\Session
     
     /**
      * Magic method to directly get session data
-     *
+     * @param string $key
+     * @return mixed
      */
     public function __get(string $key) : mixed
     {
@@ -33,8 +35,9 @@ class Session extends \Symfony\Component\HttpFoundation\Session\Session
     
    
     /**
-     * check if session has key
-     *
+     * check if session or flashbag has key
+     * @param string $key
+     * @return bool
      */
     public function has(string $key): bool
     {
@@ -59,11 +62,15 @@ class Session extends \Symfony\Component\HttpFoundation\Session\Session
 
     /**
      * Get/Set flash message
-     *
+     * If message and type is provided then set the flash message
+     * If only type is provided then return all messages of that type
+     * @param string|null $type
+     * @param string|null $message
+     * @return array<mixed>|null
      */
-    public function flash(?string $type = null,?string $message = null): ?array
+    public function flash(?string $type = null,string|null $message = null): ?array
     {
-        if (!is_null($message)) {
+        if (!is_null($message) && !is_null($type)) {
             $this->getFlashBag()->add($type, $message);
             return null;
         } else {

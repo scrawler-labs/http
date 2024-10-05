@@ -10,27 +10,31 @@ declare(strict_types=1);
 
 namespace Scrawler\Http;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 class Response extends \Symfony\Component\HttpFoundation\Response
 {
 
     /**
-     *  Redirect to url 
+     * Redirect to url 
+     * @param string $url
+     * @return RedirectResponse
      */
-    public function redirect($url): RedirectResponse
+    public function redirect(string $url): RedirectResponse
     {
         return new RedirectResponse($url);
     }
 
     /**
-     *  Return json response
+     * Return json response
+     * @param string|array<mixed> $data
+     * @param array<mixed> $headers
+     * @return Response
      */
-    public function json($data,$headers=[]): Response
+    public function json(string|array $data,array $headers=[]): Response
     {
         if(is_array($data)){
-            $data = json_encode($data);
+            $data = \Safe\json_encode($data);
         }
         $this->setContent($data);
         $this->headers->set('Content-Type', 'application/json');
