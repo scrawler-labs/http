@@ -3,9 +3,9 @@
 beforeAll(function () {
     db()->connect(
         [
-            'dbname' => 'test',
-            'user' => 'root',
-            'password' => 'root@1432',
+            'dbname' => 'test_database',
+            'user' => 'admin',
+            'password' => 'rootpass',
             'host' => '127.0.0.1',
             'driver' => 'pdo_mysql',
         ]
