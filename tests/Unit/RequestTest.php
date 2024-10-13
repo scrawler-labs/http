@@ -1,7 +1,7 @@
 <?php
 
-it('tests get()', function () {
-    $request = new \Scrawler\Http\Request();
+it('tests get()', function (): void {
+    $request = new Scrawler\Http\Request();
     $request->query->set('key', 'value');
     $request->request->set('key1', 'value1');
     expect($request->get('key'))->toBe('value');
@@ -9,8 +9,8 @@ it('tests get()', function () {
     expect($request->get('key2', 'default'))->toBe('default');
 });
 
-it('tests get() with json request',function(){
-    $request = new \Scrawler\Http\Request(
+it('tests get() with json request', function (): void {
+    $request = new Scrawler\Http\Request(
         [],
         [],
         [],
@@ -23,8 +23,8 @@ it('tests get() with json request',function(){
     expect($request->get('name'))->toBe('Pranjal');
 });
 
-it('tests __get()', function () {
-    $request = new \Scrawler\Http\Request();
+it('tests __get()', function (): void {
+    $request = new Scrawler\Http\Request();
     $request->query->set('key', 'value');
     $request->request->set('key1', 'value1');
     expect($request->key)->toBe('value');
@@ -32,15 +32,15 @@ it('tests __get()', function () {
     expect($request->key2)->toBeNull();
 });
 
-it('tests all()',function(){
-    $request = new \Scrawler\Http\Request();
+it('tests all()', function (): void {
+    $request = new Scrawler\Http\Request();
     $request->query->set('key', 'value');
     $request->request->set('key1', 'value1');
     expect($request->all())->toMatchArray(['key' => 'value', 'key1' => 'value1']);
 });
 
-it('tests all() with json',function(){
-    $request = new \Scrawler\Http\Request(
+it('tests all() with json', function (): void {
+    $request = new Scrawler\Http\Request(
         [],
         [],
         [],
@@ -51,11 +51,11 @@ it('tests all() with json',function(){
     );
     $request->query->set('key', 'value');
     $request->request->set('key1', 'value1');
-    expect($request->all())->toMatchArray(['key' => 'value', 'key1' => 'value1','name'=>'Pranjal']);
+    expect($request->all())->toMatchArray(['key' => 'value', 'key1' => 'value1', 'name' => 'Pranjal']);
 });
 
-it('tests has()',function(){
-    $request = new \Scrawler\Http\Request();
+it('tests has()', function (): void {
+    $request = new Scrawler\Http\Request();
     $request->query->set('key', 'value');
     $request->request->set('key1', 'value1');
     expect($request->has('key'))->toBeTrue();
@@ -63,8 +63,8 @@ it('tests has()',function(){
     expect($request->has('key2'))->toBeFalse();
 });
 
-it('tests has() with json',function(){
-    $request = new \Scrawler\Http\Request(
+it('tests has() with json', function (): void {
+    $request = new Scrawler\Http\Request(
         [],
         [],
         [],
@@ -81,18 +81,18 @@ it('tests has() with json',function(){
     expect($request->has('key2'))->toBeFalse();
 });
 
-it('tests url()',function(){
-    $request = \Scrawler\Http\Request::create('/test');
+it('tests url()', function (): void {
+    $request = Scrawler\Http\Request::create('/test');
     expect($request->url())->toBe('http://localhost/test');
 });
 
-it('tests url() generation with path',function(){
-    $request = \Scrawler\Http\Request::create('/test');
+it('tests url() generation with path', function (): void {
+    $request = Scrawler\Http\Request::create('/test');
     expect($request->url('/hello'))->toBe('http://localhost/hello');
 });
 
-it('tests is()',function(){
-    $request = \Scrawler\Http\Request::create('/test');
+it('tests is()', function (): void {
+    $request = Scrawler\Http\Request::create('/test');
     expect($request->is('/test'))->toBeTrue();
     expect($request->is('/test1'))->toBeFalse();
 });

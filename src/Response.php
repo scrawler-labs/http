@@ -1,24 +1,24 @@
 <?php
-declare(strict_types=1);
-
-/**
- * Scrawler Request Object
+/*
+ * This file is part of the Scrawler package.
  *
- * @package: Scrawler
- * @author: Pranjal Pandey
+ * (c) Pranjal Pandey <its.pranjalpandey@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
+declare(strict_types=1);
 
 namespace Scrawler\Http;
 
-
-
+/**
+ * Response class adds magic to the Symfony response.
+ */
 class Response extends \Symfony\Component\HttpFoundation\Response
 {
-
     /**
-     * Redirect to url 
-     * @param string $url
-     * @return RedirectResponse
+     * Redirect to url.
      */
     public function redirect(string $url): RedirectResponse
     {
@@ -26,14 +26,14 @@ class Response extends \Symfony\Component\HttpFoundation\Response
     }
 
     /**
-     * Return json response
+     * Return json response.
+     *
      * @param string|array<mixed> $data
-     * @param array<mixed> $headers
-     * @return Response
+     * @param array<mixed>        $headers
      */
-    public function json(string|array $data,array $headers=[]): Response
+    public function json(string|array $data, array $headers = []): Response
     {
-        if(is_array($data)){
+        if (is_array($data)) {
             $data = \Safe\json_encode($data);
         }
         $this->setContent($data);
@@ -41,7 +41,7 @@ class Response extends \Symfony\Component\HttpFoundation\Response
         foreach ($headers as $key => $value) {
             $this->headers->set($key, $value);
         }
+
         return $this;
     }
-
 }

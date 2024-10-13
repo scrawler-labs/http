@@ -1,6 +1,6 @@
 <?php
 
-beforeAll(function () {
+beforeAll(function (): void {
     db()->connect(
         [
             'dbname' => 'test_database',
@@ -10,29 +10,27 @@ beforeAll(function () {
             'driver' => 'pdo_mysql',
         ]
     );
-    print ("Database connected\n");
 });
 
-it('tests session set with database adapter', function () {
-    $session = new \Scrawler\Http\Session(new \Scrawler\Http\Adapters\Session\DatabaseAdapter());
+it('tests session set with database adapter', function (): void {
+    $session = new Scrawler\Http\Session(new Scrawler\Http\Adapters\Session\DatabaseAdapter());
     $session->set('test', 'test');
     $session->set('test2', 'test2');
     $session->save();
     expect($session->get('test'))->toBe('test');
     expect($session->get('test2'))->toBe('test2');
     expect($session->all())->toBe(['test' => 'test', 'test2' => 'test2']);
-
 });
 
-it('tests session close with database adapter', function () {
-    $session = new \Scrawler\Http\Session(new \Scrawler\Http\Adapters\Session\DatabaseAdapter());
+it('tests session close with database adapter', function (): void {
+    $session = new Scrawler\Http\Session(new Scrawler\Http\Adapters\Session\DatabaseAdapter());
     $session->set('test', 'test');
     $session->clear();
     expect($session->get('test'))->toBe(null);
 });
 
-it('tests session update database adapter', function () {
-    $session = new \Scrawler\Http\Session(new \Scrawler\Http\Adapters\Session\DatabaseAdapter());
+it('tests session update database adapter', function (): void {
+    $session = new Scrawler\Http\Session(new Scrawler\Http\Adapters\Session\DatabaseAdapter());
     $session->set('test', 'test');
     $session->save();
     expect($session->get('test'))->toBe('test');
@@ -41,8 +39,8 @@ it('tests session update database adapter', function () {
     expect($session->get('test'))->toBe('test1');
 });
 
-it('tests invalidate database adapter', function () {
-    $session = new \Scrawler\Http\Session(new \Scrawler\Http\Adapters\Session\DatabaseAdapter());
+it('tests invalidate database adapter', function (): void {
+    $session = new Scrawler\Http\Session(new Scrawler\Http\Adapters\Session\DatabaseAdapter());
     $session->set('test', 'test');
     $session->save();
     $session->invalidate(0);
@@ -50,8 +48,8 @@ it('tests invalidate database adapter', function () {
     expect($session->get('test'))->toBe(null);
 });
 
-it('tests lifetime', function () {
-    $session = new \Scrawler\Http\Session(new \Scrawler\Http\Adapters\Session\DatabaseAdapter());
+it('tests lifetime', function (): void {
+    $session = new Scrawler\Http\Session(new Scrawler\Http\Adapters\Session\DatabaseAdapter());
 
     expect($session->getMetadataBag()->getLifetime())->toBe(0);
 });
@@ -71,23 +69,21 @@ it('tests lifetime', function () {
 
 // });
 
-it('tests session gc with database adapter', function () {
-    $session = new \Scrawler\Http\Session(new \Scrawler\Http\Adapters\Session\DatabaseAdapter());
-    (int) \Safe\ini_set(  'session.gc_maxlifetime',1);
+it('tests session gc with database adapter', function (): void {
+    $session = new Scrawler\Http\Session(new Scrawler\Http\Adapters\Session\DatabaseAdapter());
+    \Safe\ini_set('session.gc_maxlifetime', 1);
     $expiry = \Safe\ini_get('session.gc_maxlifetime');
     $session->set('test', 'test');
     $session->save();
     session_gc();
-    sleep($expiry+2);
+    sleep($expiry + 2);
     expect($session->get('test'))->toBe(null);
 });
 
-it('test auto table creation for db handler',function(){
-    db()->getConnection()->executeStatement("DROP TABLE IF EXISTS session; ");
-    $session = new \Scrawler\Http\Session(new \Scrawler\Http\Adapters\Session\DatabaseAdapter());
+it('test auto table creation for db handler', function (): void {
+    db()->getConnection()->executeStatement('DROP TABLE IF EXISTS session; ');
+    $session = new Scrawler\Http\Session(new Scrawler\Http\Adapters\Session\DatabaseAdapter());
     $session->set('test', 'test');
     $session->save();
     expect($session->get('test'))->toBe('test');
 });
-
-

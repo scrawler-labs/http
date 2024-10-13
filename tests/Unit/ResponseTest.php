@@ -1,22 +1,22 @@
 <?php
 
-it('tests redirect()', function () {
-    $response = new \Scrawler\Http\Response();
+it('tests redirect()', function (): void {
+    $response = new Scrawler\Http\Response();
     $redirect = $response->redirect('https://example.com');
-    expect($redirect)->toBeInstanceOf(\Scrawler\Http\RedirectResponse::class);
+    expect($redirect)->toBeInstanceOf(Scrawler\Http\RedirectResponse::class);
 });
 
-it('tests json()', function () {
-    $response = new \Scrawler\Http\Response();
+it('tests json()', function (): void {
+    $response = new Scrawler\Http\Response();
     $json = $response->json(['key' => 'value']);
-    expect($json)->toBeInstanceOf(\Scrawler\Http\Response::class);
+    expect($json)->toBeInstanceOf(Scrawler\Http\Response::class);
     expect($json->getContent())->toBe('{"key":"value"}');
 });
 
-it('tests response() with headers', function () {
-    $response = new \Scrawler\Http\Response();
+it('tests response() with headers', function (): void {
+    $response = new Scrawler\Http\Response();
     $json = $response->json(['key' => 'value'], ['Content-Type' => 'application/json']);
-    expect($json)->toBeInstanceOf(\Scrawler\Http\Response::class);
+    expect($json)->toBeInstanceOf(Scrawler\Http\Response::class);
     expect($json->getContent())->toBe('{"key":"value"}');
     expect($json->headers->get('Content-Type'))->toBe('application/json');
 });
