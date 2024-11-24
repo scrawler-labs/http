@@ -1,9 +1,5 @@
 <?php
 
-it('tests request()', function (): void {
-    $request = request();
-    expect($request)->toBeInstanceOf(Scrawler\Http\Request::class);
-});
 
 it('tests response()', function (): void {
     $response = response();

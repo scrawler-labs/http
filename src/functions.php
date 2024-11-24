@@ -8,26 +8,7 @@
  * file that was distributed with this source code.
  */
 
-if (!function_exists('request')) {
-    /**
-     * Get the request object.
-     */
-    function request(): Scrawler\Http\Request
-    {
-        // @codeCoverageIgnoreStart
-        if (class_exists('\Scrawler\App')) {
-            if (!Scrawler\App::engine()->has('request')) {
-                $request = Scrawler\Http\Request::createFromGlobals();
-                Scrawler\App::engine()->register('request', $request);
-            }
 
-            return Scrawler\App::engine()->request();
-        }
-        // @codeCoverageIgnoreEnd
-
-        return Scrawler\Http\Request::createFromGlobals();
-    }
-}
 
 if (!function_exists('response')) {
     /**
@@ -35,17 +16,7 @@ if (!function_exists('response')) {
      */
     function response(): Scrawler\Http\Response
     {
-        // @codeCoverageIgnoreStart
-        if (class_exists('\Scrawler\App')) {
-            if (!Scrawler\App::engine()->has('response')) {
-                $response = new Scrawler\Http\Response();
-                Scrawler\App::engine()->register('response', $response);
-            }
-
-            return Scrawler\App::engine()->response();
-        }
-        // @codeCoverageIgnoreEnd
-
+        
         return new Scrawler\Http\Response();
     }
 }
