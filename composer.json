@@ -1,5 +1,6 @@
 {
     "name": "scrawler/http",
+    "version": "2.0",
     "description": "Http component for scrawler framework",
     "license": "MIT",
     "authors": [
