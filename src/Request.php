@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace Scrawler\Http;
 
+use Exception;
+
 /**
  * Request class adds magic to the Symfony request.
  */
@@ -45,8 +47,12 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      */
     private function getContentValue(string $key): mixed
     {
-        if ($this->getContent() && \Safe\json_decode($this->getContent()) && isset(\Safe\json_decode($this->getContent())->$key)) {
-            return \Safe\json_decode($this->getContent())->$key;
+        if ($this->getContent()) {
+            try{
+                return \Safe\json_decode($this->getContent())->$key;
+            }catch(Exception $e){
+                return null;
+            }
         }
 
         return null;
@@ -68,8 +74,12 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      */
     public function all(): array
     {
-        if ($this->getContent() && \Safe\json_decode($this->getContent())) {
-            return array_merge($this->request->all(), $this->query->all(), \Safe\json_decode($this->getContent(), true));
+        if ($this->getContent()) {
+            try{
+                return array_merge($this->request->all(), $this->query->all(), \Safe\json_decode($this->getContent(), true));
+            }catch(Exception $e){
+                return array_merge($this->request->all(), $this->query->all());
+            }
         }
 
         return array_merge($this->request->all(), $this->query->all());
@@ -80,8 +90,12 @@ class Request extends \Symfony\Component\HttpFoundation\Request
      */
     public function has(string $key): bool
     {
-        if ($this->getContent() && \Safe\json_decode($this->getContent()) && isset(\Safe\json_decode($this->getContent())->$key)) {
-            return true;
+        if ($this->getContent()) {
+            try{
+                return isset(\Safe\json_decode($this->getContent())->$key) || $this->request->has($key) || $this->query->has($key);
+            }catch(Exception $e){
+                return $this->request->has($key) || $this->query->has($key);
+            }
         }
 
         return $this->request->has($key) || $this->query->has($key);
