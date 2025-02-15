@@ -20,7 +20,7 @@ class DatabaseHandler extends AbstractSessionHandler implements \SessionHandlerI
     /**
      * Store Database instance.
      *
-     * @var \Scrawler\Arca\Database
+     * @var \Scrawler\Database
      */
     private $db;
 
