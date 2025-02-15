@@ -8,6 +8,29 @@
  * file that was distributed with this source code.
  */
 
+ if (!function_exists('response')) {
+    /**
+     * Get the response object.
+     */
+    function response(): Scrawler\Http\Response
+    {
+        
+        return new Scrawler\Http\Response();
+    }
+}
+
+if (!function_exists('request')) {
+    /**
+     * Get the response object.
+     */
+    function response(): Scrawler\Http\Request
+    {
+        if (class_exists('\Scrawler\App')) {
+            return Scrawler\App::engine()->request();
+        }    
+        return  Scrawler\Http\Request::createFromGlobals();
+    }
+}
 
 
 if (!function_exists('response')) {
@@ -16,7 +39,9 @@ if (!function_exists('response')) {
      */
     function response(): Scrawler\Http\Response
     {
-        
+        if (class_exists('\Scrawler\App')) {
+            return Scrawler\App::engine()->response();
+        }    
         return new Scrawler\Http\Response();
     }
 }
