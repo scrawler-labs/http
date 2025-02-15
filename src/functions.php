@@ -23,7 +23,7 @@ if (!function_exists('request')) {
     /**
      * Get the response object.
      */
-    function response(): Scrawler\Http\Request
+    function request(): Scrawler\Http\Request
     {
         if (class_exists('\Scrawler\App')) {
             return Scrawler\App::engine()->request();
