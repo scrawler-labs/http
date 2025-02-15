@@ -15,7 +15,7 @@ namespace Scrawler\Http;
  */
 class RedirectResponse extends Response
 {
-    protected $targetUrl;
+    protected string $targetUrl;
 
     /**
      * Creates a redirect response so that it conforms to the rules defined for a redirect status code.
@@ -23,11 +23,10 @@ class RedirectResponse extends Response
      * @param string $url     The URL to redirect to. The URL should be a full URL, with schema etc.,
      *                        but practically every browser redirects on paths only as well
      * @param int    $status  The HTTP status code (302 "Found" by default)
-     * @param array  $headers The headers (Location is always set to the given URL)
+     * @param array<string,string>  $headers The headers (Location is always set to the given URL)
      *
      * @throws \InvalidArgumentException
      *
-     * @see https://tools.ietf.org/html/rfc2616#section-10.3
      */
     public function __construct(string $url, int $status = 302, array $headers = [])
     {
