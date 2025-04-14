@@ -6,6 +6,12 @@ it('tests response()', function (): void {
     expect($response)->toBeInstanceOf(Scrawler\Http\Response::class);
 });
 
+it('tests request()', function (): void {
+    $request = request();
+    expect($request)->toBeInstanceOf(Scrawler\Http\Request::class);
+});
+
+
 it('tests session()', function (): void {
     $session = session();
     expect($session)->toBeInstanceOf(Scrawler\Http\Session::class);

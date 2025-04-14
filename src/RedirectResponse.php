@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Scrawler package.
  *
@@ -20,13 +21,12 @@ class RedirectResponse extends Response
     /**
      * Creates a redirect response so that it conforms to the rules defined for a redirect status code.
      *
-     * @param string $url     The URL to redirect to. The URL should be a full URL, with schema etc.,
-     *                        but practically every browser redirects on paths only as well
-     * @param int    $status  The HTTP status code (302 "Found" by default)
-     * @param array<string,string>  $headers The headers (Location is always set to the given URL)
+     * @param string               $url     The URL to redirect to. The URL should be a full URL, with schema etc.,
+     *                                      but practically every browser redirects on paths only as well
+     * @param int                  $status  The HTTP status code (302 "Found" by default)
+     * @param array<string,string> $headers The headers (Location is always set to the given URL)
      *
      * @throws \InvalidArgumentException
-     *
      */
     public function __construct(string $url, int $status = 302, array $headers = [])
     {

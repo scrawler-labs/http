@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Scrawler package.
  *
@@ -11,8 +12,6 @@
 declare(strict_types=1);
 
 namespace Scrawler\Http;
-
-use Exception;
 
 /**
  * Request class adds magic to the Symfony request.
@@ -48,9 +47,9 @@ class Request extends \Symfony\Component\HttpFoundation\Request
     private function getContentValue(string $key): mixed
     {
         if ($this->getContent()) {
-            try{
+            try {
                 return \Safe\json_decode($this->getContent())->$key;
-            }catch(Exception $e){
+            } catch (\Exception) {
                 return null;
             }
         }
@@ -75,9 +74,9 @@ class Request extends \Symfony\Component\HttpFoundation\Request
     public function all(): array
     {
         if ($this->getContent()) {
-            try{
+            try {
                 return array_merge($this->request->all(), $this->query->all(), \Safe\json_decode($this->getContent(), true));
-            }catch(Exception $e){
+            } catch (\Exception) {
                 return array_merge($this->request->all(), $this->query->all());
             }
         }
@@ -91,9 +90,9 @@ class Request extends \Symfony\Component\HttpFoundation\Request
     public function has(string $key): bool
     {
         if ($this->getContent()) {
-            try{
+            try {
                 return isset(\Safe\json_decode($this->getContent())->$key) || $this->request->has($key) || $this->query->has($key);
-            }catch(Exception $e){
+            } catch (\Exception) {
                 return $this->request->has($key) || $this->query->has($key);
             }
         }

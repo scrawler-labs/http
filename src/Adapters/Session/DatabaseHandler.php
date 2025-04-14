@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Scrawler package.
  *
@@ -19,10 +20,8 @@ class DatabaseHandler extends AbstractSessionHandler implements \SessionHandlerI
 {
     /**
      * Store Database instance.
-     *
-     * @var \Scrawler\Database
      */
-    private $db;
+    private ?\Scrawler\Database $db = null;
 
     /**
      * Check if gc is called.

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Scrawler package.
  *
@@ -8,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
- if (!function_exists('response')) {
+if (!function_exists('response')) {
     /**
      * Get the response object.
      */
     function response(): Scrawler\Http\Response
     {
-        
         return new Scrawler\Http\Response();
     }
 }
@@ -27,11 +27,11 @@ if (!function_exists('request')) {
     {
         if (class_exists('\Scrawler\App')) {
             return Scrawler\App::engine()->request();
-        }    
-        return  Scrawler\Http\Request::createFromGlobals();
+        }
+
+        return Scrawler\Http\Request::createFromGlobals();
     }
 }
-
 
 if (!function_exists('response')) {
     /**
@@ -41,7 +41,8 @@ if (!function_exists('response')) {
     {
         if (class_exists('\Scrawler\App')) {
             return Scrawler\App::engine()->response();
-        }    
+        }
+
         return new Scrawler\Http\Response();
     }
 }
@@ -73,7 +74,6 @@ if (!function_exists('redirect')) {
      * Optionally send data to add to flashbag.
      *
      * @param array<mixed> $data
-     *
      */
     function redirect(string $url, array $data = []): Scrawler\Http\RedirectResponse
     {
