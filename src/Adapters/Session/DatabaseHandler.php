@@ -21,7 +21,7 @@ class DatabaseHandler extends AbstractSessionHandler implements \SessionHandlerI
     /**
      * Store Database instance.
      */
-    private ?\Scrawler\Database $db = null;
+    private \Scrawler\Database $db;
 
     /**
      * Check if gc is called.
